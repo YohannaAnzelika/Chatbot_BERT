@@ -18,11 +18,11 @@ def get_base64_of_bin_file(bin_file_path):
 
 def inject_custom_css(dark_mode):
     if dark_mode:
-        bg_gradient = "#0a192f"
+        bg_gradient = "#0a1a32"
         text_color = "#ffffff"
         input_bg = "#112240"
-        box_bg = "#1f2937"
-        link_color = "#64ffda"
+        box_bg = "#525c5be2"
+        link_color = "#3d707a"
         sidebar_bg = "#0a192f"
         sidebar_text = "#ffffff"
         label_color = "#ffffff"
@@ -36,107 +36,119 @@ def inject_custom_css(dark_mode):
         sidebar_text = "#0a1932"
         label_color = "#0a1932"
 
-    st.markdown(
-        f"""
-        <style>
-        html, body, .stApp {{
-            background-color: {bg_gradient};
-        }}
+    custom_css = f"""
+    <style>
+    html, body, .stApp {{
+        background-color: {bg_gradient};
+    }}
 
-        .navbar {{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            margin-bottom: 30px;
-            border-radius: 16px;
-            background: linear-gradient(to right, rgba(10,25,50,0.85), rgba(33,80,120,0.85));
-            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-        }}
+    .navbar {{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        margin-bottom: 30px;
+        border-radius: 16px;
+        background: linear-gradient(to right, rgba(10,25,50,0.85), rgba(33,80,120,0.85));
+        box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }}
 
-        .navbar img {{
-            height: 64px;
-            margin-right: 15px;
-            background-color: white;
-            border-radius: 12px;
-            padding: 6px;
-            border: 1px solid #ccc;
-        }}
+    .navbar img {{
+        height: 64px;
+        margin-right: 15px;
+        background-color: white;
+        border-radius: 12px;
+        padding: 6px;
+        border: 1px solid #ccc;
+    }}
 
-        .navbar h1 {{
-            color: white;
-            font-size: 1.9rem;
-            margin: 0;
-        }}
+    .navbar h1 {{
+        color: white;
+        font-size: 1.9rem;
+        margin: 0;
+    }}
 
-        label, .stTextInput label {{
-            color: {label_color} !important;
-            font-weight: 600;
-        }}
+    label, .stTextInput label {{
+        color: {label_color} !important;
+        font-weight: 700;
+    }}
 
-        .stTextInput input {{
-            background-color: {input_bg};
-            color: {text_color};
-            border: 2px solid #888;
-            border-radius: 10px;
-            padding: 12px;
-        }}
+    .stTextInput input {{
+        background-color: {input_bg};
+        color: {text_color} !important;
+        border: 2px solid #888;
+        border-radius: 10px;
+        padding: 12px;
+        font-weight: 500;
+    }}
 
-        .btn-link {{
-            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-            color: #ffffff;
-            padding: 10px 18px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 16px;
-            display: inline-block;
-            margin-top: 5px;
-            box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.3);
-        }}
+    .stTextInput input::placeholder {{
+        color: #cccccc !important;
+        opacity: 1;
+    }}
 
-        .btn-link:hover {{
-            background: #00c6ff;
-            text-decoration: none;
-        }}
+    .btn-link {{
+        background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+        color: #ffffff;
+        padding: 10px 18px;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 16px;
+        display: inline-block;
+        margin-top: 5px;
+        box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.3);
+    }}
 
-        .link-box {{
-            background-color: {box_bg};
-            padding: 16px 20px;
-            border-radius: 12px;
-            margin-top: 20px;
-            color: {text_color};
-            font-size: 16px;
-            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
-        }}
+    .btn-link:hover {{
+        background: #00c6ff;
+        text-decoration: none;
+    }}
 
-        .link-box a {{
-            color: {link_color};
-            text-decoration: none;
-            font-weight: bold;
-        }}
+    .link-box {{
+        background-color: {box_bg};
+        padding: 16px 20px;
+        border-radius: 12px;
+        margin-top: 20px;
+        color: {text_color};
+        font-size: 16px;
+        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+    }}
 
-        .link-box a:hover {{
-            text-decoration: underline;
-        }}
+    .link-box a {{
+        color: {link_color};
+        text-decoration: none;
+        font-weight: bold;
+    }}
 
-        section[data-testid="stSidebar"] > div:first-child {{
-            padding-top: 1.5rem;
-            padding-right: 1.5rem;
-            padding-left: 1.5rem;
-            background-color: {sidebar_bg};
-            color: {sidebar_text};
-            height: 100%;
-            border-top-right-radius: 1rem;
-            border-bottom-right-radius: 1rem;
-        }}
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
+    .link-box a:hover {{
+        text-decoration: underline;
+    }}
+
+    section[data-testid="stSidebar"] > div:first-child {{
+        padding-top: 1.5rem;
+        padding-right: 1.5rem;
+        padding-left: 1.5rem;
+        background-color: {sidebar_bg};
+        color: {sidebar_text};
+        height: 100%;
+        border-top-right-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+    }}
+    """
+
+    if dark_mode:
+        custom_css += """
+        section[data-testid="stSidebar"] * {
+            color: #ffffff !important;
+        }
+        """
+
+    custom_css += "</style>"
+    st.markdown(custom_css, unsafe_allow_html=True)
 
 def main():
-    st.set_page_config(page_title="Chatbot PTPN IV", page_icon="🤖", layout="wide")
+    st.set_page_config(page_title="Agrobot PTPN IV", page_icon="🤖", layout="wide")
 
     if "history" not in st.session_state:
         st.session_state.history = []
@@ -152,7 +164,7 @@ def main():
         f"""
         <div class="navbar">
             <img src="data:image/png;base64,{logo_base64}" alt="PTPN IV Logo">
-            <h1>Chatbot PTPN IV</h1>
+            <h1>Agrobot PTPN IV</h1>
         </div>
         """,
         unsafe_allow_html=True
@@ -172,24 +184,13 @@ def main():
         all_links = answer.get("all_links", [])
 
         if all_links:
-            st.markdown(f"<div class='link-box'>{description}</div>", unsafe_allow_html=True)
-
-            search_query = st.text_input("🔎 Cari di daftar sistem/aplikasi:", "")
-            filtered_links = [
-                item for item in all_links
-                if search_query.lower() in item["description"].lower()
-                or search_query.lower() in item["keyword"].lower()
-            ]
-
-            for item in filtered_links:
+            for item in all_links:
                 st.markdown(f"""
-                    <div style="margin: 10px 0;">
-                        🔗 <a href="{item['url']}" target="_blank">{item['description']}</a>
+                    <div class="link-box">
+                        {item['description']}<br><br>
+                        <a class="btn-link" href="{item['url']}" target="_blank">🔗 Kunjungi Aplikasi</a>
                     </div>
                 """, unsafe_allow_html=True)
-
-            if not filtered_links:
-                st.info("Tidak ditemukan sistem dengan kata tersebut.")
 
         elif description and url:
             st.markdown(f"""

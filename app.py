@@ -1,69 +1,142 @@
-from flask import Flask, request, jsonify
-from flask_cors import CORS
-from sentence_transformers import SentenceTransformer, util
 import torch
-from trial_model import ptpn_data, trigger_phrases
+import torch.nn as nn
+import json
+from flask import Flask, request, jsonify
+from utils import tokenize, bag_of_words
+from model import NeuralNet
+from flask_cors import CORS
+import difflib
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 app = Flask(__name__)
 CORS(app)
 
-# Load IndoBERT model
-model = SentenceTransformer("indobenchmark/indobert-base-p1")
+# Load intents
+with open("intents.json", "r", encoding="utf-8") as f:
+    intents = json.load(f)["intents"]
 
-# Encode semua deskripsi + keyword
-combined_texts = [f"{item['description']} {item['keyword']}" for item in ptpn_data]
-desc_embeddings = model.encode(combined_texts, convert_to_tensor=True)
+# Load model
+data = torch.load("model.pth")
+input_size = data["input_size"]
+hidden_size = data["hidden_size"]
+output_size = data["output_size"]
+all_words = data["all_words"]
+tags = data["tags"]
+
+model = NeuralNet(input_size, hidden_size, output_size)
+model.load_state_dict(data["model_state"])
+model.eval()
 
 @app.route("/chat", methods=["POST"])
 def chat():
-    query = request.json.get("query", "").strip().lower()
-    if not query:
-        return jsonify({"answer": {
-            "description": "Silakan masukkan pertanyaan terlebih dahulu."
-        }})
+    data = request.get_json()
+    query = data.get("query", "").lower()
 
-    # Respons sapaan langsung
-    if query in ["hai", "halo", "hello", "assalamualaikum", "selamat pagi", "selamat siang"]:
+    # Jika pertanyaan mengandung kata kunci untuk semua/daftar situs
+    trigger_keywords = [
+        "semua", "seluruh", "situs apa saja", "daftar situs", "akses apa saja",
+        "apa saja yang tersedia", "situs web apa saja yang ada disini","website yang ada", "link apa saja"
+    ]
+    if any(k in query for k in trigger_keywords):
+        all_links = []
+        for intent in intents:
+            tag = intent["tag"]
+            for response in intent["responses"]:
+                url = next((word for word in response.split() if word.startswith("http")), "")
+                if url:
+                    description = response.replace(url, "").strip()
+                    all_links.append({
+                        "description": description,
+                        "url": url,
+                        "keyword": tag
+                    })
         return jsonify({
             "answer": {
-                "description": "Hai juga! Ada yang bisa saya bantu seputar PTPN IV?"
+                "description": "",
+                "url": "",
+                "all_links": all_links,
+                "tag": "all"
             }
         })
 
-    # Trigger untuk menampilkan semua link
-    if any(trigger in query for trigger in trigger_phrases):
+    # Tokenisasi & prediksi model
+    sentence = tokenize(query)
+    X = bag_of_words(sentence, all_words)
+    X = X.reshape(1, X.shape[0])
+    X = torch.from_numpy(X).to(device)
+
+    output = model(X)
+    _, predicted = torch.max(output, dim=1)
+    tag = tags[predicted.item()]
+    prob = torch.softmax(output, dim=1)[0][predicted.item()]
+
+    if prob >= 0.5:
+        for intent in intents:
+            if intent["tag"] == tag:
+                if tag == "greeting":
+                    return jsonify({
+                        "answer": {
+                            "description": intent["responses"][0],
+                            "url": "",
+                            "all_links": [],
+                            "tag": tag
+                        }
+                    })
+                else:
+                    all_links = []
+                    for response in intent["responses"]:
+                        url = next((word for word in response.split() if word.startswith("http")), "")
+                        description = response.replace(url, "").strip() if url else response
+                        all_links.append({
+                            "description": description,
+                            "url": url,
+                            "keyword": tag
+                        })
+                    return jsonify({
+                        "answer": {
+                            "description": all_links[0]["description"] if all_links else "",
+                            "url": all_links[0]["url"] if all_links else "",
+                            "all_links": all_links,
+                            "tag": tag
+                        }
+                    })
+
+    # Fallback ke pencocokan pattern manual dengan fuzzy match
+    fallback_links = []
+    for intent in intents:
+        tag = intent["tag"]
+        for pattern in intent["patterns"]:
+            pattern_l = pattern.lower()
+            if query in pattern_l or difflib.get_close_matches(query, [pattern_l], cutoff=0.7):
+                for response in intent["responses"]:
+                    url = next((word for word in response.split() if word.startswith("http")), "")
+                    description = response.replace(url, "").strip() if url else response
+                    fallback_links.append({
+                        "description": description,
+                        "url": url,
+                        "keyword": tag
+                    })
+                break
+
+    if fallback_links:
         return jsonify({
             "answer": {
-                "description": "Berikut semua sistem dan aplikasi yang tersedia:",
-                "all_links": ptpn_data
+                "description": fallback_links[0]["description"],
+                "url": fallback_links[0]["url"],
+                "all_links": fallback_links,
+                "tag": tag
             }
         })
 
-    # Jawaban berbasis IndoBERT
-    return jsonify({"answer": _get_bert_response(query)})
-
-def _get_bert_response(query):
-    query_embedding = model.encode(query, convert_to_tensor=True)
-    sim_scores = util.pytorch_cos_sim(query_embedding, desc_embeddings)[0]
-    best_idx = torch.argmax(sim_scores).item()
-    best_score = sim_scores[best_idx].item()
-
-    if best_score >= 0.37:
-        return {
-            "description": f"Berikut informasi yang saya temukan:\n\n{ptpn_data[best_idx]['description']}",
-            "url": ptpn_data[best_idx]["url"]
+    return jsonify({
+        "answer": {
+            "description": "Maaf, saya belum menemukan link yang cocok. Silakan coba lagi.",
+            "url": "",
+            "all_links": [],
+            "tag": "unknown"
         }
-
-    return {
-        "description": (
-            "Maaf, saya belum menemukan jawaban yang cocok untuk pertanyaan itu. "
-            "Silakan coba dengan kata kunci lain atau tanyakan dengan cara berbeda."
-        )
-    }
-
-@app.route("/all_links", methods=["GET"])
-def get_all_data():
-    return jsonify(ptpn_data)
+    })
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,0 +1,457 @@
+{
+  "intents": [
+    {
+      "tag": "site_1",
+      "patterns": [
+        "website ptpn 4",
+        "website ptpn4",
+        "ptpn4",
+        "homepage",
+        "web profil",
+        "web utama",
+        "situs resmi",
+        "link profil",
+        "profil",
+        "situs profil",
+        "ptpn iv",
+        "halaman utama",
+        "official site",
+        "tentang ptpn"
+      ],
+      "responses": [
+        "Situs resmi PTPN IV dapat diakses di https://www.ptpn4.co.id/"
+      ]
+    },
+    {
+      "tag": "site_2",
+      "patterns": [
+        "data publik",
+        "publikasi",
+        "informasi publik",
+        "keterbukaan",
+        "portal publik",
+        "portal keterbukaan",
+        "transparansi",
+        "kip",
+        "akses informasi"
+      ],
+      "responses": [
+        "Portal Informasi Publik dapat diakses di https://kip.ptpn4.co.id/"
+      ]
+    },
+    {
+      "tag": "site_3",
+      "patterns": [
+        "ims",
+        "ptpn4",
+        "management system",
+        "mutu",
+        "integrated management system",
+        "sistem manajemen",
+        "iso",
+        "audit mutu",
+        "sertifikasi",
+        "ptpn iv",
+        "ims portal"
+      ],
+      "responses": ["IMS PTPN IV dapat diakses di https://ims.ptpn4.co.id/"]
+    },
+    {
+      "tag": "site_4",
+      "patterns": [
+        "eproc",
+        "ptpn4 project",
+        "dashboard project",
+        "manajemen proyek",
+        "project apps",
+        "website proyek",
+        "aplikasi proyek",
+        "tender ptpn",
+        "tender ptpn4",
+        "tender ptpn iv",
+        "website proyek",
+        "tender",
+        "apps proyek",
+        "website pengadaan",
+        "pengadaan"
+      ],
+      "responses": [
+        "PTPN4 Project Apps dapat diakses di https://www.ptpn4apps.id/ptpn4-projects/"
+      ]
+    },
+    {
+      "tag": "site_5",
+      "patterns": [
+        "distribusi bibit",
+        "tanaman",
+        "bibit",
+        "bibit ptpn",
+        "perkebunan",
+        "portal bibit",
+        "bibit sawit",
+        "kecambah",
+        "tanaman unggul"
+      ],
+      "responses": ["Portal Bibit dapat diakses di https://bibit.ptpn4.co.id/"]
+    },
+    {
+      "tag": "site_6",
+      "patterns": [
+        "dashboard tanam",
+        "replant",
+        "monitoring tanam",
+        "tanam sawit ulang",
+        "tanam ulang",
+        "replanting",
+        "rekap tanam ulang"
+      ],
+      "responses": [
+        "Dashboard Tanam Ulang dapat diakses di https://www.ptpn4apps.id:8089/"
+      ]
+    },
+    {
+      "tag": "site_7",
+      "patterns": [
+        "traceability",
+        "aplikasi dokumen",
+        "doctrace r2",
+        "doctrace",
+        "monitoring dokumen",
+        "dashboard",
+        "sistem pelacakan dokumen"
+      ],
+      "responses": [
+        "Dashboard DOCTRACE R2 dapat diakses di https://www.ptpn4apps.id:8087/"
+      ]
+    },
+    {
+      "tag": "site_8",
+      "patterns": [
+        "output harian",
+        "dashboard produksi",
+        "laporan produksi",
+        "harian ptpn4",
+        "rekap harian",
+        "produksi harian",
+        "produksi sawit"
+      ],
+      "responses": [
+        "Produksi Harian dapat diakses di https://www.ptpn4apps.id:8086/"
+      ]
+    },
+    {
+      "tag": "site_9",
+      "patterns": [
+        "login dhbb",
+        "katalog",
+        "dashboard dhbb",
+        "catalogue dhbb",
+        "dhbb",
+        "online dhbb",
+        "harga bahan baku",
+        "dhbb online"
+      ],
+      "responses": [
+        "DHBB ONLINE dapat diakses di https://www.ptpn4apps.id:8085/"
+      ]
+    },
+    {
+      "tag": "site_10",
+      "patterns": [
+        "logistik",
+        "monitoring lama",
+        "versi lama",
+        "etracking",
+        "tracking lama",
+        "tracking",
+        "sistem pelacakan lama"
+      ],
+      "responses": [
+        "eTracking (lama) dapat diakses di https://www.ptpn4apps.id:8084/"
+      ]
+    },
+    {
+      "tag": "site_11",
+      "patterns": [
+        "strategi marketing",
+        "dashboard sales",
+        "sales",
+        "penjualan",
+        "data marketing",
+        "marketing",
+        "link marketing",
+        "sales marketing",
+        "sistem penjualan",
+        "pemasaran"
+      ],
+      "responses": [
+        "Sales Marketing dapat diakses di https://www.ptpn4apps.id:8083/"
+      ]
+    },
+    {
+      "tag": "site_12",
+      "patterns": [
+        "tbm",
+        "tanaman belum menghasilkan",
+        "v3 tbm",
+        "foto tbm",
+        "dokumentasi tbm",
+        "galeri tbm",
+        "album tbm"
+      ],
+      "responses": [
+        "Album TBM V.3 dapat diakses di https://www.ptpn4apps.id:8082/"
+      ]
+    },
+    {
+      "tag": "site_13",
+      "patterns": [
+        "workflow",
+        "sistem kerja",
+        "doctrace",
+        "proses bisnis",
+        "monitoring proses",
+        "tekpol",
+        "audit bisnis",
+        "proses teknis"
+      ],
+      "responses": [
+        "Monitoring Proses Bisnis TEKPOL (DOCTRACE) dapat diakses di https://www.ptpn4apps.id:8000/"
+      ]
+    },
+    {
+      "tag": "site_14",
+      "patterns": [
+        "tanaman ptpn",
+        "dashboard pica",
+        "pica",
+        "pemetaan tanaman",
+        "monitoring tanaman",
+        "gis tanaman",
+        "gis",
+        "audit tanaman"
+      ],
+      "responses": ["PICA TANAMAN dapat diakses di https://gis.ptpn4.or.id/"]
+    },
+    {
+      "tag": "site_15",
+      "patterns": [
+        "mims",
+        "monitoring losses",
+        "kehilangan produksi",
+        "kerugian",
+        "ptpn group",
+        "losses",
+        "dashboard mims"
+      ],
+      "responses": [
+        "Dashboard MIMS Losses PTPN Group dapat diakses di https://mims-foss.holding-perkebunan.com/"
+      ]
+    },
+    {
+      "tag": "site_16",
+      "patterns": [
+        "pembelian tbs",
+        "tbs",
+        "login tbs",
+        "beli tbs",
+        "tandan buah segar",
+        "harga tbs",
+        "harga sawit"
+      ],
+      "responses": [
+        "PEMBELIAN TBS dapat diakses di https://www.ptpn4apps.id/hargatbsapp/public/login"
+      ]
+    },
+    {
+      "tag": "site_17",
+      "patterns": [
+        "dashboard teh",
+        "produk teh",
+        "ritel teh",
+        "teh n4",
+        "penjualan teh",
+        "login teh"
+      ],
+      "responses": [
+        "RITEL TEH N4 dapat diakses di https://www.ptpn4apps.id:8090/ptpn4_teh/public/login"
+      ]
+    },
+    {
+      "tag": "site_18",
+      "patterns": [
+        "logistik",
+        "dashboard inventory",
+        "inventory",
+        "inventory control",
+        "stok barang",
+        "manajemen stok",
+        "msi"
+      ],
+      "responses": [
+        "MSI INVENTORY dapat diakses di https://www.ptpn4apps.id/ptpn4-inv-web/public/login"
+      ]
+    },
+    {
+      "tag": "site_19",
+      "patterns": [
+        "dokumen au31",
+        "pelacakan dokumen",
+        "doctrace",
+        "sistem dokumen",
+        "doctrace au31",
+        "au31"
+      ],
+      "responses": [
+        "DOCTRACE AU31 v1.0 dapat diakses di https://www.ptpn4apps.id:8090/doctraceau31/public/login"
+      ]
+    },
+    {
+      "tag": "site_20",
+      "patterns": [
+        "form spp",
+        "spp",
+        "doctrace",
+        "trace spp",
+        "spp dokumen",
+        "dokumen spp"
+      ],
+      "responses": [
+        "DOCTRACE SPP dapat diakses di https://www.ptpn4apps.id:8090/doctrace/public/login"
+      ]
+    },
+    {
+      "tag": "site_21",
+      "patterns": [
+        "rapat",
+        "jadwal meeting",
+        "reservasi rapat",
+        "mbs",
+        "booking meeting",
+        "meeting",
+        "sistem rapat"
+      ],
+      "responses": [
+        "MEETING BOOKING SYSTEM dapat diakses di https://www.ptpn4apps.id:8090/mbs/public/login"
+      ]
+    },
+    {
+      "tag": "site_22",
+      "patterns": [
+        "official",
+        "situs ptpn4",
+        "web ptpn4",
+        "halaman utama ptpn",
+        "website resmi"
+      ],
+      "responses": [
+        "OFFICIAL WEBSITE PTPN4 dapat diakses di https://www.ptpn4.co.id/"
+      ]
+    },
+    {
+      "tag": "site_23",
+      "patterns": [
+        "komunikasi internal",
+        "elemen",
+        "memo",
+        "surat",
+        "pesan",
+        "internal memo",
+        "dokumen",
+        "ptpn"
+      ],
+      "responses": [
+        "Memo Elemen PTPN dapat diakses di https://elemen.ptpn.id/memo/sent/27G2Get8/mac"
+      ]
+    },
+    {
+      "tag": "site_24",
+      "patterns": [
+        "ips",
+        "perikatan",
+        "legal",
+        "dokumen kontrak",
+        "ips holding",
+        "kontrak",
+        "perjanjian"
+      ],
+      "responses": [
+        "Kontrak IPS dapat diakses di https://ips.holding-perkebunan.com/contracts/perikatan"
+      ]
+    },
+    {
+      "tag": "site_25",
+      "patterns": [
+        "palmco",
+        "palmco dashboard",
+        "monitoring palmco",
+        "login palmco",
+        "dashboard",
+        "akses palmco"
+      ],
+      "responses": [
+        "Dashboard Palmco dapat diakses di https://palmco.my.id/dashboard"
+      ]
+    },
+    {
+      "tag": "site_26",
+      "patterns": [
+        "akses",
+        "ptpn4",
+        "ihcs",
+        "login",
+        "login aplikasi",
+        "integrasi sistem",
+        "ihcs portal"
+      ],
+      "responses": [
+        "Login IHCS dapat diakses di https://ihcs.ptpn4.co.id/login"
+      ]
+    },
+    {
+      "tag": "site_27",
+      "patterns": [
+        "holding",
+        "tentang holding",
+        "struktur holding",
+        "perusahaan",
+        "company profile",
+        "profil",
+        "ptpn"
+      ],
+      "responses": [
+        "Profil Holding Perkebunan dapat diakses di https://holding-perkebunan.com/profil-perusahaan/"
+      ]
+    },
+    {
+      "tag": "site_28",
+      "patterns": [
+        "sistem informasi ptpn",
+        "apa itu n4tds",
+        "bagaimana platform n4tds bekerja",
+        "digitalisasi sistem ptpn",
+        "aplikasi n4tds",
+        "saya ingin tahu tentang sistem n4tds",
+        "akses ke platform n4tds",
+        "dimana bisa melihat sistem n4tds"
+      ],
+      "responses": ["Sistem N4TDS dapat diakses di https://n4tds.com/"]
+    },
+    {
+      "tag": "greeting",
+      "patterns": [
+        "hai",
+        "halo",
+        "hello",
+        "assalamualaikum",
+        "selamat pagi",
+        "selamat siang"
+      ],
+      "responses": [
+        "Hai juga! Ada yang bisa saya bantu seputar PTPN IV?",
+        "Halo! Silakan tanyakan apapun tentang sistem PTPN IV.",
+        "Selamat datang! Apa yang ingin kamu ketahui?"
+      ]
+    }
+  ]
+}
